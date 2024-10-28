@@ -11,9 +11,9 @@ const port = 3000;
 app.use(express.static(_dirname + '/public'));
 // app.use('/node_modules', express.static(_dirname + '/node_modules'));
 
-app.get("/", (req, res) => {
-    console.log(_dirname + "/public/index.html");
-    res.sendFile(_dirname + "/public/index.html");
+app.get("/homepage", (req, res) => {
+    console.log(_dirname + "/public/homepage.html");
+    res.sendFile(_dirname + "/public/homepage.html");
 });
 
 app.get("/login", (req, res) => {
