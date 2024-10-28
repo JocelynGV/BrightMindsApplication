@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Login Page</title>
+    <script>
+        function handleLogin(event) {
+            event.preventDefault(); // Prevent the default form submission
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Simple authentication check (replace with real authentication in production)
+            if (username === 'HCI' && password === 'HCI') {
+                // Show logging in message
+                const message = document.createElement('div');
+                message.textContent = 'Logging in...';
+                message.style.fontSize = '18px';
+                message.style.color = 'blue';
+                message.style.marginTop = '20px';
+                document.querySelector('.container').appendChild(message);
+
+                // Redirect after a short delay
+                setTimeout(() => {
+                    window.location.href = 'home.html'; // Redirect to welcome.html
+                }, 2000); // 2 seconds delay
+            } else {
+                alert('Invalid username or password!'); // Alert for invalid credentials
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <img src="lightbulb.png" alt="Lightbulb" class="lightbulb">
+        <h1 class="title">BRIGHT MINDS</h1>
+        <h2>Login</h2>
+        <form onsubmit="handleLogin(event)">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>
