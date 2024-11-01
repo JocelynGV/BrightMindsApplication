@@ -1,3 +1,121 @@
+body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 400px;
+}
+
+.lightbulb {
+    width: 100px;
+    margin-bottom: 20px;
+}
+
+.title {
+    color: orange;
+    text-transform: uppercase;
+    margin: 10px 0;
+}
+
+h2 {
+    margin: 10px 0;
+}
+
+.input-group {
+    margin: 15px 0;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 0 auto; 
+    display: block;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#home-container {
+    display: flex;;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center content vertically */
+    height: 100vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.home-header {
+    margin-bottom: 20px; /* Space between title and buttons */
+    color: white; /* Change the color for better visibility */
+}
+
+#home-background {
+    height: 100%;
+}
+
+.create-button {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-bottom: 20px; /* Space below the Create button */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px; /* Adjusted margin to move buttons lower */
+}
+
+.subject-button {
+    background-color: #007BFF; /* Blue color for subject buttons */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin: 0 10px; /* Space between subject buttons */
+}
+
 .box {
     width: 100px;
     height: 100px;
@@ -23,3 +141,81 @@
     background-color: pink;
 }
 
+
+
+.flipCard {
+    -webkit-perspective: 800;
+    -ms-perspective: 800;
+    -moz-perspective: 800;
+    -o-perspective: 800;
+     width: 400px;
+     height: 200px;
+     position: relative;
+     margin: 50px auto;
+  }
+  .flipCard .card.flipped {
+    transform:rotatey(-180deg);
+    -ms-transform:rotatey(-180deg); /* IE 9 */
+    -moz-transform:rotatey(-180deg); /* Firefox */
+    -webkit-transform:rotatey(-180deg); /* Safari and Chrome */
+    -o-transform:rotatey(-180deg); /* Opera */
+  }
+  .flipCard .card {
+    width: 100%;
+    height: 100%;
+    -webkit-transform-style: preserve-3d;
+    -webkit-transition: 0.5s;
+    -moz-transform-style: preserve-3d;
+    -moz-transition: 0.5s;
+    -ms-transform-style: preserve-3d;
+    -ms-transition: 0.5s;
+    -o-transform-style: preserve-3d;
+    -o-transition: 0.5s;
+    transform-style: preserve-3d;
+    transition: 0.5s;
+  }
+  .flipCard .card .side {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    cursor: pointer;
+    position: absolute;
+    box-sizing: border-box;
+    z-index: 2;
+    backface-visibility: hidden;  /* W3C */
+    -webkit-backface-visibility: hidden; /* Safari & Chrome */
+    -moz-backface-visibility: hidden; /* Firefox */
+    -ms-backface-visibility: hidden; /* Internet Explorer */
+    -o-backface-visibility: hidden; /* Opera */
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    overflow: auto;
+  }
+  .flipCard .card .back {
+    background: white;
+    color: black;
+    transform:rotatey(-180deg);
+    -ms-transform:rotatey(-180deg); /* IE 9 */
+    -moz-transform:rotatey(-180deg); /* Firefox */
+    -webkit-transform:rotatey(-180deg); /* Safari and Chrome */
+    -o-transform:rotatey(-180deg); /* Opera */
+  }
+  
+  .flipCard .card .front {
+    font-family: Georgia;
+    font-size: 3em;
+    text-align: center;
+    line-height: 160px;
+    background-color: #7030a0;
+    border: 3px solid white;
+    color: white;
+  
+  }
+  .flipCard .card .back {
+    background-color: #dbb2f9;
+    border: 3px solid white;
+    text-align: center;
+    color: black;
+    padding-top: 50px;
+    font-family: Georgia;
+    font-size: 2em;
+  }
