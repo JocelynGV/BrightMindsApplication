@@ -33,5 +33,13 @@
         <!-- <script src="../node_modules\animejs\lib\anime.min.js"></script> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
         <script src="js/animations.js"></script>
+        <script>
+            document.querySelectorAll(".create-button").forEach(button => {
+                button.onclick = function() {
+                    window.location.href = 'create.html';
+                };
+            });
+        </script>
+        
     </body>
 </html>

@@ -1,0 +1,43 @@
+.card {
+    margin: 10px 10px;
+  }
+  
+  input[type='checkbox'] {
+    display: none;
+  }
+  
+  .card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10%;
+    padding-bottom: 10%;
+  }
+  
+  .card-flip {
+    display: grid;
+    height: 300px;
+    grid-template: 1fr / 1fr;
+    grid-template-areas: "frontAndBack";
+    transform-style: preserve-3d;
+    transition: all 0.7s ease;
+  }
+  
+  .card-flip div {
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+  }
+  
+  .front {
+    grid-area: frontAndBack;
+  }
+  
+  .back {
+    grid-area: frontAndBack;
+    transform: rotateY(-180deg);
+  }
+  
+  input[type='checkbox']:checked + .card-container .card-flip {
+    transform: rotateY(180deg);
+  }
+  
