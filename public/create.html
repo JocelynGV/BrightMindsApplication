@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+
+        .btn {
+            background-color: DodgerBlue;
+            border: none;
+            color: white;
+            padding: 12px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .btn:hover {
+            background-color: RoyalBlue;
+        }
+
+        .form-container {
+            width: 80%;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .add-btn, .remove-btn {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .remove-btn {
+            background-color: red;
+        }
+
+        .save-btn {
+            background-color: green;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
+            display: block;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<a href="homepage.html" class="btn">
+    <i class="fa fa-home"></i> Home
+</a>
+
+<div class="form-container">
+    <form action="savedata.php" method="POST">
+        <label for="subject">Subject:</label>
+        <select id="subject" name="subject" required>
+            <option value="math">Math</option>
+            <option value="english">English</option>
+        </select>
+
+        <label for="topic">Topic:</label>
+        <input type="text" id="topic" name="topic" placeholder="Enter topic" required>
+
+        <table id="qa-table">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Answer</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><textarea name="questions[]" rows="2" cols="30" required></textarea></td>
+                    <td><textarea name="answers[]" rows="2" cols="30" required></textarea></td>
+                    <td><button type="button" class="remove-btn" onclick="removeRow(this)">Remove</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button type="button" class="add-btn" onclick="addRow()">Add Question</button>
+        
+        <button type="submit" class="save-btn">Save</button>
+    </form>
+</div>
+
+<script>
+    // Function to add a new row to the table
+    function addRow() {
+        const table = document.getElementById('qa-table').getElementsByTagName('tbody')[0];
+        const newRow = table.insertRow();
+
+        newRow.innerHTML = `
+            <td><textarea name="questions[]" rows="2" cols="30" required></textarea></td>
+            <td><textarea name="answers[]" rows="2" cols="30" required></textarea></td>
+            <td><button type="button" class="remove-btn" onclick="removeRow(this)">Remove</button></td>
+        `;
+    }
+
+    // Function to remove a row from the table
+    function removeRow(button) {
+        const row = button.parentNode.parentNode;
+        row.parentNode.removeChild(row);
+    }
+</script>
+
+</body>
+</html>
+
