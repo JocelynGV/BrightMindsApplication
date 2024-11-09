@@ -6,36 +6,37 @@
 //     duration: 800
 // });
 
-var textWrapper = document.getElementById('mainHeader');
-// textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letters'>$&</span>");
-var letterArray = textWrapper.innerHTML.split("");
-var letterStr = "";
+// var textWrapper = document.getElementById('mainHeader');
+// // textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letters'>$&</span>");
+// var letterArray = textWrapper.innerHTML.split("");
+// var letterStr = "";
 
-for (let i = 0; i < letterArray.length; i++) {
-    letterStr += "<span class='letters'>" + letterArray[i] + "</span>"
-}
-textWrapper.innerHTML = letterStr;
+// for (let i = 0; i < letterArray.length; i++) {
+//     letterStr += "<span class='letters'>" + letterArray[i] + "</span>"
+// }
+// textWrapper.innerHTML = letterStr;
 
 
-anime.timeline({loop: true})
-  .add({
-    targets: '.header .letters',
-    translateY: [".5em", 0],
-    // translateZ: 0,
-    duration: 750,
-    delay: (el, i) => 50 * i
-  }).add({
-    targets: '.header',
-    opacity: 0,
-    duration: 1000,
-    easing: "easeOutExpo",
-    delay: 1000
-  });
+// anime.timeline({loop: true})
+//   .add({
+//     targets: '.header .letters',
+//     translateY: [".5em", 0],
+//     // translateZ: 0,
+//     duration: 750,
+//     delay: (el, i) => 50 * i
+//   }).add({
+//     targets: '.header',
+//     opacity: 0,
+//     duration: 1000,
+//     easing: "easeOutExpo",
+//     delay: 1000
+//   });
 
 anime({
-    targets: '.box',
-    translateX: 250,
-    loop: true,
+    targets: '.answer-option',
+    translateX: [-250, 0],
+    loop: false,
 //    direction: 'alternate',
-    delay: anime.stagger(100, {start: 600})
+    // delay: anime.stagger(100, {start: 600})
+    delay: anime.stagger(50)
   });
