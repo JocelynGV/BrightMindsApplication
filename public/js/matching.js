@@ -1,10 +1,10 @@
 $(document).ready(function() {
     $('.answer-option').click(function() {
         var answerText = $(this).find('.answer-text').text();
-        console.log(answerText);
+        alert(answerText);
     });
 
-    
+
     fetchData();
 });
 

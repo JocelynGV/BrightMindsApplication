@@ -66,7 +66,7 @@ app.post("/submit", (req, res) => {
 
 let sql;
 app.get("/cards", (req, res) => {
-    sql = "SELECT * FROM subjects";
+    sql = "SELECT * FROM topics";
     try {
         db.all(sql, [], (err, rows) => {
             if (err) return res.json({ status: 300, success: false, error: err });

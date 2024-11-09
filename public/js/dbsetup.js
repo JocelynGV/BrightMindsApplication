@@ -12,41 +12,35 @@ const db = new sqlite3.Database('my-database.db', (err) => {
 // Example: Create a table if it doesn't exist
 db.serialize(() => {
     //subject table
-    db.run(`CREATE TABLE IF NOT EXISTS subjects (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        subject_name TEXT NOT NULL
-    )`);
-
-    // topics table
     db.run(`CREATE TABLE IF NOT EXISTS topics (
-        tid INTEGER PRIMARY KEY AUTOINCREMENT,
-        subject_id INTEGER,
-        name VARCHAR(50) NOT NULL,
-        FOREIGN KEY (subject_id) REFERENCES subjects(id)
+        tID INTEGER PRIMARY KEY AUTOINCREMENT,
+        subject TEXT NOT NULL,
+        name TEXT NOT NULL
     )`);
 
     //questions and answers table 
     db.run(`CREATE TABLE IF NOT EXISTS questions (
-        qid INTEGER PRIMARY KEY AUTOINCREMENT,
-        topics_tid INTEGER,
+        qID INTEGER PRIMARY KEY AUTOINCREMENT,
+        tID INTEGER,
         question TEXT NOT NULL,
         answer TEXT NOT NULL,
-        FOREIGN KEY (topic_tid) REFERENCES topics(tid)
+        FOREIGN KEY (tID) REFERENCES topics(tID)
     )`);
 
-    // Example: Insert a row
-    const stmt = db.prepare(`INSERT INTO subjects (subject_name) VALUES (?)`);
-    stmt.run('English');
-    stmt.finalize();
+    // // Example: Insert a row
+    // const stmt = db.prepare(`INSERT INTO subjects (subject_name) VALUES (?)`);
+    // stmt.run('English');
+    // stmt.finalize();
 
     // Example: Query the table
-    db.all(`SELECT * FROM subjects`, [], (err, rows) => {
-        if (err) {
-            throw err;
-        }
-        console.log(rows);
-    });
-});
+//     db.all(`SELECT * FROM subjects`, [], (err, rows) => {
+//         if (err) {
+//             throw err;
+//         }
+//         console.log(rows);
+//     });
+
+ });
 
 // Close the database connection
 db.close((err) => {
