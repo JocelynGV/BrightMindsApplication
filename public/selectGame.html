@@ -27,7 +27,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
-        const topic = $("#topic").text().trim(); // Call .text() as a function
+        const topic = $("#topic").text().trim();
         alert(topic);
         $("#matching").attr("href", `/matching/${encodeURIComponent(topic)}`);
         $("#flashcards").attr("href", `/flashcards/${encodeURIComponent(topic)}`);

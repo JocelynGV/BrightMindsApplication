@@ -73,6 +73,13 @@ app.get("/selectGame", (req, res) => {
     res.sendFile(_dirname + "/public/selectGame.html");
 });
 
+// fix logic to get topic from select Topic page
+
+// app.get("/selectGame/:topic", (req, res) => {
+//     console.log(_dirname + "/public/selectGame.html");
+//     res.sendFile(_dirname + "/public/selectGame.html");
+// });
+
 app.post("/submit", (req, res) => {
     console.log(req.body);
 });

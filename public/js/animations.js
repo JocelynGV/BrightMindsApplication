@@ -32,11 +32,13 @@
 //     delay: 1000
 //   });
 
-anime({
-    targets: '.answer-option',
-    translateX: [-250, 0],
-    loop: false,
-//    direction: 'alternate',
-    // delay: anime.stagger(100, {start: 600})
-    delay: anime.stagger(50)
-  });
+  function playAnswerAnimation() {
+    anime({
+        targets: '.answer-option',
+        translateY: [-250, 0],
+        loop: false,
+    //    direction: 'alternate',
+        // delay: anime.stagger(100, {start: 600})
+        delay: anime.stagger(50)
+      });
+  }
