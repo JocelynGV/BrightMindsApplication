@@ -14,6 +14,7 @@ const app = express();
 const port = 3000;
 // const anime = require('animejs');
 
+var topic = "";
 
 // Open a database connection using the Database constructor
 const db = new sqlite3.Database('public/js/my-database.db', (err) => {
@@ -50,8 +51,20 @@ app.get("/flashcards", (req, res) => {
     res.sendFile(_dirname + "/public/flashcards.html");
 });
 
+app.get("/flashcards/:topic", (req, res) => {
+    topic = req.params.topic;
+    console.log(topic);
+    res.sendFile(_dirname + "/public/flashcards.html");
+});
+
 app.get("/matching", (req, res) => {
     console.log(_dirname + "/public/matching.html");
+    res.sendFile(_dirname + "/public/matching.html");
+});
+
+app.get("/matching/:topic", (req, res) => {
+    topic = req.params.topic;   
+    console.log(topic);
     res.sendFile(_dirname + "/public/matching.html");
 });
 
@@ -64,25 +77,47 @@ app.post("/submit", (req, res) => {
     console.log(req.body);
 });
 
-let sql;
+// let sql;
 app.get("/cards", (req, res) => {
-    sql = "SELECT * FROM topics";
-    try {
-        db.all(sql, [], (err, rows) => {
-            if (err) return res.json({ status: 300, success: false, error: err });
-            
-            if (rows.length < 1) 
-                return res.json({ status: 300, success: false, error: "No Match" });
+    console.log("my new topic: " + topic);
+    const sqlGetTopicId = "SELECT tID FROM topics WHERE name = ?";
+    
+    db.get(sqlGetTopicId, [topic], (err, row) => {
+        if (err) {
+            console.error("Error fetching topic_id:", err);
+            return res.json({ status: 300, success: false, error: err.message });
+        }
 
-            return res.json({ status:200, data: rows, success: true });
-            
+        if (!row) {
+            console.log("No topic found for:", topic);
+            return res.json({ status: 300, success: false, error: "Topic not found" });
+        }
+
+        const topicId = row.tID; // Get topic_id from the row
+
+        console.log("Found topic_id:", topicId);
+
+        // Now, use the topic_id to get the questions from the questions table
+        const sqlGetQuestions = "SELECT * FROM questions WHERE tID = ?";
+
+        db.all(sqlGetQuestions, [topicId], (err, questions) => {
+            if (err) {
+                console.error("Error fetching questions:", err);
+                return res.json({ status: 300, success: false, error: err.message });
+            }
+
+            if (questions.length < 1) {
+                return res.json({ status: 300, success: false, error: "No questions found" });
+            }
+
+            return res.json({ status: 200, data: questions, success: true });
         });
-    } catch (error) {
-        return res.json({
-            status: 400,
-            success:false
-        });
-    }
+    });
+});
+
+app.get("/cards/:topic", (req, res) => {
+    console.log(req.params.topic);
+
 });
 
 app.listen(port, () => {
