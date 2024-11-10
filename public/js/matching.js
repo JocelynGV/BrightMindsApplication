@@ -23,6 +23,17 @@ async function fetchData() {
 
         const jsonArray = data.data;
         console.log(data.data);
+
+        for (const key in jsonArray) {
+
+        }
+
+        // jsonArray[0].question;
+        console.log(jsonArray[0]);
+        console.log(jsonArray[0].question);
+
+        $("#question").text(jsonArray[0].question);
+        
     } catch (error) {
         console.log(error);
     }
