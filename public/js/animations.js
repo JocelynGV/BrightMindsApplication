@@ -35,10 +35,10 @@
   function playAnswerAnimation() {
     anime({
         targets: '.answer-option',
-        translateY: [-250, 0],
+        translateY: [-1250, 0],
         loop: false,
     //    direction: 'alternate',
         // delay: anime.stagger(100, {start: 600})
-        delay: anime.stagger(50)
+        delay: anime.stagger(50, {start: 100})
       });
   }

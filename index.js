@@ -41,6 +41,11 @@ app.get("/create", (req, res) => {
     res.sendFile(_dirname + "/public/create.html");
 });
 
+app.post("/create", (req, res) => {
+    console.log(req.body);
+    res.send(req.json());
+});
+
 app.get("/login", (req, res) => {
     console.log(_dirname + "/public/login.html");
     res.sendFile(_dirname + "/public/login.html");
@@ -117,7 +122,7 @@ app.get("/cards", (req, res) => {
                 return res.json({ status: 300, success: false, error: "No questions found" });
             }
 
-            return res.json({ status: 200, data: questions, success: true });
+            return res.json({ status: 200, data: questions, topic: topic, success: true });
         });
     });
 });
