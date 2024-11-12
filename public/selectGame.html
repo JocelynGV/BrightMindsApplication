@@ -13,16 +13,26 @@
 
 <body>
     <div class="container">
-        <h1 id="topic" class="topic">Topic</h1>
+
+        <h1 id="topic" class="topic">Multiplication</h1>
         <label>Select Match or Flashcards</label>
         <div class="game-selection">
-            <a href="matching.html" class="btn btn-primary btn-lg" tabindex="-1" role="button">Match</a>
-            <a href="flashcards.html" class="btn btn-secondary btn-lg " tabindex="-1" role="button" aria-disabled="true">FlashCards</a>
+            <a class="btn btn-primary btn-lg" tabindex="-1" role="button" id="matching">Match</a>
+            <a class="btn btn-secondary btn-lg " tabindex="-1" role="button" aria-disabled="true" id="flashcards">FlashCards</a>
         </div>
         <div class ="flashcard-set">
 
         </div>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        const topic = $("#topic").text().trim();
+        alert(topic);
+        $("#matching").attr("href", `/matching/${encodeURIComponent(topic)}`);
+        $("#flashcards").attr("href", `/flashcards/${encodeURIComponent(topic)}`);
+
+    </script>
 </body>
 
 </html>
