@@ -25,6 +25,9 @@ async function fetchData() {
         const jsonArray = data.data;
         console.log(data.data);
 
+        // set matching topic
+        $("#matching-topic").text(data.topic);
+
         // shuffle array of json Objects
         shuffle(jsonArray);
 
@@ -36,37 +39,75 @@ async function fetchData() {
 
         console.log(ansArray);
 
-        // set progress bar and progress number to 0
-        // $("#progress-red").attr("style", `width: ${encodeURIComponent(topic)}%`);
-        // $("#progress-green").attr("style", `width: ${encodeURIComponent(topic)}%`);
-
-
-        $("#complete-questions").text(count + 1);
+        // set progress number to 0
+        $("#complete-questions").text(count);
         $("#total-questions").text(jsonArray.length);
 
         displayQuestion(jsonArray[count], ansArray);
 
+        // calculate width for progress bar
         var widthPercent = (1 / jsonArray.length) * 100;
         var redWidth = 0, greenWidth = 0;
+
+        // onClick function for when an answer is selected
         $('.answer-option').click(function() {
             var answerText = $(this).find('.answer-text').text();
             
             // handle correct and incorrect answers
             if (jsonArray[count].answer == answerText) {
+                // play correct audio 
+                var audio = new Audio("../assets/correct.mp3");
+                audio.play();
+
+                // increase progress bar
                 greenWidth += widthPercent;
                 $("#progress-green").attr("style", `width: ${encodeURIComponent(greenWidth)}%`);
+
+                // add overlay
+                $("#overlay").css("display", "block");
+                $("#overlay").css("background-color", "rgba(0, 255, 0, 0.5)");
             } else {
+                // play correct audio 
+                var audio = new Audio("../assets/incorrect.mp3");
+                audio.play();
+                
+                // increase progress bar
                 redWidth += widthPercent;
                 $("#progress-red").attr("style", `width: ${encodeURIComponent(redWidth)}%`);
+
+                // add overlay
+                $("#overlay").css("display", "block");
+                $("#overlay").css("background-color", "rgba(255, 0, 0, 0.5)");
             }
+            playEndingAnimation();
+
 
             // increment count if there is another question
             // + 1 because we need to check if the next value will be in the array
             if (count + 1 < jsonArray.length) {
                 console.log(jsonArray[count]);
                 count++;
-                displayQuestion(jsonArray[count], ansArray);
-                $("#complete-questions").text(count + 1);
+                // I added a delay before we change the question so the audio can finish before the new question is displayed and the animation starts
+                setTimeout(() => {
+                    displayQuestion(jsonArray[count], ansArray);
+                    $("#complete-questions").text(count);
+                }, 400);
+
+                // after new question is displayed remove overlay
+                setTimeout(() => {
+                    $("#overlay").css("display", "none");
+                }, 300);
+            } else {
+                // handle the end of the game
+                setTimeout(() => {
+                    // increment count
+                    $("#complete-questions").text(count + 1);
+                    // remove overlay
+                    $("#overlay").css("display", "none");
+                    // play animation to move answer options off screen
+                    playEndingAnimation();
+                },400);
+                // $("#overlay").css("background-color", "rgba(135, 206, 235, 0.5)");
             }
 
         });
@@ -105,7 +146,10 @@ function displayQuestion(questionObj, ansArray) {
     });
 
     // plays apple animation from animations.js. It is importnat to note that the animations.js file is called before this js file is called in the html pages
-    playAnswerAnimation();
+    // also I added a delay so the audio can finish before the animation starts
+    setTimeout(() => {
+        playFallAnimation();
+    }, 75);
 }
 
 function shuffle(array) {
