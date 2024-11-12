@@ -43,7 +43,7 @@
       });
   }
 
-  function playFallAnimation() {
+  function playEndingAnimation() {
     anime({
         targets: '.answer-option',
         translateY: 2250,
@@ -58,7 +58,7 @@
   function playFallAnimation() {
     anime({
         targets: '.answer-option',
-        translateY: 2250,
+        translateY: 1250,
         opacity: [1, 0],
         loop: false,
         easing: 'easeOutExpo',
