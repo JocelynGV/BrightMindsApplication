@@ -66,4 +66,14 @@
     background-color: rgba(0, 255, 0, 0.5);
     z-index: 2;
     /* cursor: pointer; */
-  }
+}
+
+#endgame-button-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#endgame-button-container .btn {
+    padding: 20px;
+    margin: 20px;
+}
