@@ -43,13 +43,43 @@ app.get("/create", (req, res) => {
 
 app.post("/create", (req, res) => {
     console.log(req.body);
+    const json = req.body;
     // res.send(req.body);
     db.serialize(() => {
         // Insert a row into topics table 
-        var sqlTopic = db.prepare(`INSERT INTO subjects (subject_name) VALUES (?)`);
-        const stmt = db.prepare(`INSERT INTO subjects (subject_name) VALUES (?)`);
-        stmt.run('English');
-        stmt.finalize();    
+        const sqlTopic = db.prepare(`INSERT INTO topics (subject, name) VALUES (?, ?)`);
+        sqlTopic.run(json.subject, json.topic);
+        sqlTopic.finalize();
+
+        const sqlGetTopicId = "SELECT tID FROM topics WHERE topic = ?";
+    
+        const topicId = 0;
+        db.get(sqlGetTopicId, [topic], (err, row) => {
+            if (err) {
+                console.error("Error fetching tID:", err);
+                return res.json({ status: 300, success: false, error: err.message });
+            }
+
+            if (!row) {
+                console.log("No topic found for:", topic);
+                return res.json({ status: 300, success: false, error: "Topic not found" });
+            }
+
+            topicId = row.topic_id; // Get topic_id from the row
+
+            console.log("Found tID:", topicId);
+        });
+
+        for (let i = 0; i < json.questions.length; i++) {
+            const questionsArray = json.questions;
+            const answersArray = json.answers; 
+            const sqlQuestions = db.prepare(`INSERT INTO questions (tID, question, answer) VALUES (?, ?, ?)`);
+            sqlQuestions.run(topicId, questionsArray[i], answersArray[i]);
+            sqlQuestions.run();
+        }
+        // const stmt = db.prepare(`INSERT INTO subjects (subject_name) VALUES (?)`);
+        // stmt.run('English');
+        // stmt.finalize();    
      });
 });
 
