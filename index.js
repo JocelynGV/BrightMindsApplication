@@ -43,44 +43,7 @@ app.get("/create", (req, res) => {
 
 app.post("/create", (req, res) => {
     console.log(req.body);
-    const json = req.body;
-    // res.send(req.body);
-    db.serialize(() => {
-        // Insert a row into topics table 
-        const sqlTopic = db.prepare(`INSERT INTO topics (subject, name) VALUES (?, ?)`);
-        sqlTopic.run(json.subject, json.topic);
-        sqlTopic.finalize();
-
-        const sqlGetTopicId = "SELECT tID FROM topics WHERE topic = ?";
-    
-        const topicId = 0;
-        db.get(sqlGetTopicId, [topic], (err, row) => {
-            if (err) {
-                console.error("Error fetching tID:", err);
-                return res.json({ status: 300, success: false, error: err.message });
-            }
-
-            if (!row) {
-                console.log("No topic found for:", topic);
-                return res.json({ status: 300, success: false, error: "Topic not found" });
-            }
-
-            topicId = row.topic_id; // Get topic_id from the row
-
-            console.log("Found tID:", topicId);
-        });
-
-        for (let i = 0; i < json.questions.length; i++) {
-            const questionsArray = json.questions;
-            const answersArray = json.answers; 
-            const sqlQuestions = db.prepare(`INSERT INTO questions (tID, question, answer) VALUES (?, ?, ?)`);
-            sqlQuestions.run(topicId, questionsArray[i], answersArray[i]);
-            sqlQuestions.run();
-        }
-        // const stmt = db.prepare(`INSERT INTO subjects (subject_name) VALUES (?)`);
-        // stmt.run('English');
-        // stmt.finalize();    
-     });
+    res.send(req.json());
 });
 
 app.get("/login", (req, res) => {
@@ -129,18 +92,38 @@ app.post("/submit", (req, res) => {
 // let sql;
 app.get("/cards", (req, res) => {
     console.log("my new topic: " + topic);
-    const sql = "SELECT * FROM topics INNER JOIN questions on topics.tID = questions.tID WHERE topics.name = ?"
-    db.all(sql, [topic], (err, questions) => {
+    const sqlGetTopicId = "SELECT tID FROM topics WHERE name = ?";
+    
+    db.get(sqlGetTopicId, [topic], (err, row) => {
         if (err) {
-            console.error("Error fetching questions:", err);
+            console.error("Error fetching topic_id:", err);
             return res.json({ status: 300, success: false, error: err.message });
         }
 
-        if (questions.length < 1) {
-            return res.json({ status: 300, success: false, error: "No questions found" });
+        if (!row) {
+            console.log("No topic found for:", topic);
+            return res.json({ status: 300, success: false, error: "Topic not found" });
         }
 
-        return res.json({ status: 200, data: questions, topic: topic, success: true });
+        const topicId = row.tID; // Get topic_id from the row
+
+        console.log("Found topic_id:", topicId);
+
+        // Now, use the topic_id to get the questions from the questions table
+        const sqlGetQuestions = "SELECT * FROM questions WHERE tID = ?";
+
+        db.all(sqlGetQuestions, [topicId], (err, questions) => {
+            if (err) {
+                console.error("Error fetching questions:", err);
+                return res.json({ status: 300, success: false, error: err.message });
+            }
+
+            if (questions.length < 1) {
+                return res.json({ status: 300, success: false, error: "No questions found" });
+            }
+
+            return res.json({ status: 200, data: questions, topic: topic, success: true });
+        });
     });
 });
 
