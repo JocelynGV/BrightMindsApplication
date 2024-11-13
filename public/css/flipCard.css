@@ -91,3 +91,23 @@ input[type='checkbox']:checked+.card-container .card-flip {
 .progress {
   width: 700px;
 }
+
+.modal-content {
+  background-color: #e0f7fa;
+  color: #01579b;
+  border-radius: 10px;
+}
+
+.modal-footer .btn-primary {
+  background-color: #0288d1;
+  border: none;
+}
+
+.modal-footer .btn-secondary {
+  background-color: #01579b;
+  border: none;
+}
+
+.modal-footer .btn:hover {
+  opacity: 0.8;
+}
