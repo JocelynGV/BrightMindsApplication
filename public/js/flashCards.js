@@ -20,6 +20,8 @@ async function fetchData() {
         // Assign the fetched data to jsonArray
         jsonArray = data.data;
 
+        shuffle(jsonArray);
+
         // Display the first flashcard initially
         updateFlashcard(currentIndex);
 
@@ -75,3 +77,10 @@ function updateProgressBar() {
     // Update the progress bar width and text
     $("#dynamic").css("width", progress + "%").attr("aria-valuenow", progress).text(Math.round(progress) + "% Complete");
 }
+
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
