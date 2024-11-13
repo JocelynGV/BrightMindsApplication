@@ -9,6 +9,7 @@ $(document).ready(function () {
 // Declare and Initalize variables
 let currentIndex = 0;
 let jsonArray = [];
+let topic = "";
 
 async function fetchData() {
     try {
@@ -23,6 +24,10 @@ async function fetchData() {
 
         // Assign the fetched data to jsonArray
         jsonArray = data.data;
+
+        // Get and set topic from jsonArray
+        topic = data.topic;
+        $('#topic').text(topic);
 
         shuffle(jsonArray);
 
