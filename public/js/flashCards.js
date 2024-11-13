@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
     fetchData();
 });
 
@@ -36,7 +36,7 @@ async function fetchData() {
     }
 }
 
- function updateFlashcard(index) {
+function updateFlashcard(index) {
     // Get the question and answer from the jsonArray
     const question = jsonArray[index]?.question || "No question available";
     const answer = jsonArray[index]?.answer || "No answer available";
@@ -80,7 +80,11 @@ function updateProgressBar() {
 
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
     }
-  }
+}
+
+function playAudio(url) {
+    new Audio(url).play();
+}
