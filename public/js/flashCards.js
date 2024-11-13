@@ -23,6 +23,9 @@ async function fetchData() {
         // Display the first flashcard initially
         updateFlashcard(currentIndex);
 
+        // Update Progress
+        updateProgressBar()
+
         // Attach click event handlers for the Previous and Next buttons
         $('#previousButton').click(showPrevious);
         $('#nextButton').click(showNext);
@@ -31,7 +34,6 @@ async function fetchData() {
     }
 }
 
- // Function to update the flashcard content based on the current index
  function updateFlashcard(index) {
     // Get the question and answer from the jsonArray
     const question = jsonArray[index]?.question || "No question available";
@@ -42,26 +44,34 @@ async function fetchData() {
     $("#answer").text(answer);
 }
 
-// Function to handle the Previous button click
 function showPrevious() {
     // Decrease the current index if its greater than 0 
     if (currentIndex > 0) {
         currentIndex--;
         updateFlashcard(currentIndex);
+        updateProgressBar()
     } else {
         // if the user tries to go back from the first flashcard
         console.log("Already at the first flashcard.");
     }
 }
 
-// Function to handle the Next button click
 function showNext() {
     // Increase the current index if its less than the last index of jsonArray
     if (currentIndex < jsonArray.length - 1) {
         currentIndex++;
         updateFlashcard(currentIndex);
+        updateProgressBar();
     } else {
         // if the user tries to go beyond the last flashcard
         console.log("Already at the last flashcard.");
     }
+}
+
+function updateProgressBar() {
+    const totalCards = jsonArray.length;
+    const progress = ((currentIndex + 1) / totalCards) * 100;
+
+    // Update the progress bar width and text
+    $("#dynamic").css("width", progress + "%").attr("aria-valuenow", progress).text(Math.round(progress) + "% Complete");
 }

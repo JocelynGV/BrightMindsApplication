@@ -14,14 +14,14 @@ input[type='checkbox'] {
 }
 
 .container {
-
+  padding-top: 5%;
 }
 
 .card-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 10%;
+  padding-top: 5%;
   padding-bottom: 10%;
 }
 
@@ -85,4 +85,8 @@ input[type='checkbox']:checked+.card-container .card-flip {
 
 .btn:hover {
   background-color: #013a63;
+}
+
+.progress {
+  width: 700px;
 }
