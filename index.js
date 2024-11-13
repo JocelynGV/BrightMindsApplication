@@ -150,18 +150,38 @@ app.get("/topics", (req, res) => {
 // let sql;
 app.get("/cards", (req, res) => {
     console.log("my new topic: " + topic);
-    const sql = "SELECT * FROM topics INNER JOIN questions on topics.tID = questions.tID WHERE topics.name = ?"
-    db.all(sql, [topic], (err, questions) => {
+    const sqlGetTopicId = "SELECT tID FROM topics WHERE name = ?";
+    
+    db.get(sqlGetTopicId, [topic], (err, row) => {
         if (err) {
-            console.error("Error fetching questions:", err);
+            console.error("Error fetching topic_id:", err);
             return res.json({ status: 300, success: false, error: err.message });
         }
 
-        if (questions.length < 1) {
-            return res.json({ status: 300, success: false, error: "No questions found" });
+        if (!row) {
+            console.log("No topic found for:", topic);
+            return res.json({ status: 300, success: false, error: "Topic not found" });
         }
 
-        return res.json({ status: 200, data: questions, topic: topic, success: true });
+        const topicId = row.tID; // Get topic_id from the row
+
+        console.log("Found topic_id:", topicId);
+
+        // Now, use the topic_id to get the questions from the questions table
+        const sqlGetQuestions = "SELECT * FROM questions WHERE tID = ?";
+
+        db.all(sqlGetQuestions, [topicId], (err, questions) => {
+            if (err) {
+                console.error("Error fetching questions:", err);
+                return res.json({ status: 300, success: false, error: err.message });
+            }
+
+            if (questions.length < 1) {
+                return res.json({ status: 300, success: false, error: "No questions found" });
+            }
+          
+            return res.json({ status: 200, data: questions, topic: topic, success: true });
+        });
     });
 });
 
