@@ -16,16 +16,7 @@ $(document).ready(function() {
 var count = 0;
 async function fetchData() {
     try {
-        const response = await fetch('/cards');
-        console.log(response);
-
-        const data = await response.json();
-        console.log(data);
-
-        const jsonArray = data.data;
-        console.log(data.data);
-
-        // shuffle array of json Objects
+         // shuffle array of json Objects
         shuffle(jsonArray);
 
         // Get all possible answers from array of objects
@@ -70,7 +61,7 @@ async function fetchData() {
             }
 
         });
-
+      
     } catch (error) {
         console.log(error);
     }

@@ -121,7 +121,7 @@ app.get("/cards", (req, res) => {
             if (questions.length < 1) {
                 return res.json({ status: 300, success: false, error: "No questions found" });
             }
-
+          
             return res.json({ status: 200, data: questions, topic: topic, success: true });
         });
     });
