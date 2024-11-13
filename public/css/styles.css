@@ -112,6 +112,8 @@ button {
 
 button:hover {
     background-color: #0056b3;
+    transform: scale(1.05);
+    transition: transform 0.2s;
 }
 
 #home-container {
@@ -194,6 +196,25 @@ button:hover {
     font-size: 4vh;
 }
 
+#create-button {
+    transform: scale(1.05);
+    transition: transform 0.2s;
+}
+
 .subject-button {
     font-size: 3vh;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.subject-image {
+    width: 20%; 
+    /* height: 40%; */
+}
+
+#topic-header {
+    font-size: 1.5em;
+    font-weight: 600;
 }

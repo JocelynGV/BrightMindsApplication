@@ -3,7 +3,7 @@ var subject = "";
 // filter topics by subject
 $(".subject-button").click(function() {
     // console.log("hello");
-    subject = $(this).text();
+    subject = $(this).val().trim();
     fetchData();
 })
 
@@ -40,4 +40,7 @@ function populateTopicNames(jsonArray) {
 
     // display all items in list
     $(".list-group-item").css("display", "block");
+
+    // display subject name
+    $("#topic-header").text("\n" + subject + "\n");
 }
