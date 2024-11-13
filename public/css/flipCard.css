@@ -1,6 +1,7 @@
 body {
   background-color: #e0f7fa; 
   color: #01579b; 
+  padding-top: 10px;
 }
 
 .card {
@@ -22,7 +23,7 @@ input[type='checkbox'] {
   justify-content: center;
   align-items: center;
   padding-top: 5%;
-  padding-bottom: 10%;
+  padding-bottom: 5%;
 }
 
 .card-flip {
