@@ -1,10 +1,15 @@
-$(document).ready(function() {
+$(document).ready(function () {
     fetchData();
+
+    
+     // if the user clicks on the play again button, restart flashcard game
+     playAgainButtonisClicked();
 });
 
 // Declare and Initalize variables
 let currentIndex = 0;
 let jsonArray = [];
+let topic = "";
 
 async function fetchData() {
     try {
@@ -19,6 +24,10 @@ async function fetchData() {
 
         // Assign the fetched data to jsonArray
         jsonArray = data.data;
+
+        // Get and set topic from jsonArray
+        topic = data.topic;
+        $('#topic').text(topic);
 
         shuffle(jsonArray);
 
@@ -36,7 +45,7 @@ async function fetchData() {
     }
 }
 
- function updateFlashcard(index) {
+function updateFlashcard(index) {
     // Get the question and answer from the jsonArray
     const question = jsonArray[index]?.question || "No question available";
     const answer = jsonArray[index]?.answer || "No answer available";
@@ -65,8 +74,9 @@ function showNext() {
         updateFlashcard(currentIndex);
         updateProgressBar();
     } else {
-        // if the user tries to go beyond the last flashcard
+        // if the user tries to go beyond the last flashcard, display congratulation pop
         console.log("Already at the last flashcard.");
+        $('#congratulationsModal').modal('show');
     }
 }
 
@@ -80,7 +90,22 @@ function updateProgressBar() {
 
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
     }
-  }
+}
+
+function playAudio(url) {
+    new Audio(url).play();
+}
+
+function playAgainButtonisClicked() {
+    // if play Again button is clicked Restart the flashcards
+    $('#playAgainButton').click(function () {
+        currentIndex = 0;
+        updateFlashcard(currentIndex);
+        shuffle(jsonArray);
+        updateProgressBar();
+        $('#congratulationsModal').modal('hide');
+    });
+}
