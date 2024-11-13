@@ -41,4 +41,30 @@
         // delay: anime.stagger(100, {start: 600})
         delay: anime.stagger(50, {start: 100})
       });
+    
+  }
+
+  function playEndingAnimation() {
+    anime({
+        targets: '.answer-option',
+        translateY: 2250,
+        loop: false,
+        easing: 'easeOutExpo',
+    //    direction: 'alternate',
+        // delay: anime.stagger(100, {start: 600})
+        delay: anime.stagger(150)
+      });
+  }
+
+  function playFallAnimation() {
+    anime({
+        targets: '.answer-option',
+        translateY: 1250,
+        opacity: [1, 0],
+        loop: false,
+        easing: 'easeOutExpo',
+    //    direction: 'alternate',
+        // delay: anime.stagger(100, {start: 600})
+        delay: anime.stagger(150)
+      });
   }
