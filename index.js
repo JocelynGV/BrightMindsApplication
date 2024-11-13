@@ -116,16 +116,18 @@ app.get("/matching/:topic", (req, res) => {
 });
 
 app.get("/selectGame", (req, res) => {
+    topic = req.query.topic;
+    console.log(topic);
     console.log(_dirname + "/public/selectGame.html");
     res.sendFile(_dirname + "/public/selectGame.html");
 });
 
-// fix logic to get topic from select Topic page
-
 // app.get("/selectGame/:topic", (req, res) => {
+//     topic = req.params.topic;
 //     console.log(_dirname + "/public/selectGame.html");
 //     res.sendFile(_dirname + "/public/selectGame.html");
 // });
+
 
 app.post("/submit", (req, res) => {
     console.log(req.body);
@@ -147,41 +149,39 @@ app.get("/topics", (req, res) => {
     }); 
 });
 
-// let sql;
-app.get("/cards", (req, res) => {
-    console.log("my new topic: " + topic);
-    const sqlGetTopicId = "SELECT tID FROM topics WHERE name = ?";
-    
-    db.get(sqlGetTopicId, [topic], (err, row) => {
+app.get("/topics/:subject", (req, res) => {
+    const subject = req.params.subject;
+    const sql = "SELECT * FROM topics WHERE subject = ?"
+
+    db.all(sql, [subject], (err, rows) => {
         if (err) {
-            console.error("Error fetching topic_id:", err);
+            console.error("Error fetching rows:", err);
             return res.json({ status: 300, success: false, error: err.message });
         }
 
-        if (!row) {
-            console.log("No topic found for:", topic);
-            return res.json({ status: 300, success: false, error: "Topic not found" });
+        if (rows.length < 1) {
+            return res.json({ status: 300, success: false, error: "No rows found" });
         }
 
-        const topicId = row.tID; // Get topic_id from the row
+        return res.json({ status: 200, data: rows, success: true });
+    }); 
+});
 
-        console.log("Found topic_id:", topicId);
+// let sql;
+app.get("/cards", (req, res) => {
+    console.log("my new topic: " + topic);
+    const sql = "SELECT * FROM topics INNER JOIN questions on topics.tID = questions.tID WHERE topics.name = ?"
+    db.all(sql, [topic], (err, questions) => {
+        if (err) {
+            console.error("Error fetching questions:", err);
+            return res.json({ status: 300, success: false, error: err.message });
+        }
 
-        // Now, use the topic_id to get the questions from the questions table
-        const sqlGetQuestions = "SELECT * FROM questions WHERE tID = ?";
+        if (questions.length < 1) {
+            return res.json({ status: 300, success: false, error: "No questions found" });
+        }
 
-        db.all(sqlGetQuestions, [topicId], (err, questions) => {
-            if (err) {
-                console.error("Error fetching questions:", err);
-                return res.json({ status: 300, success: false, error: err.message });
-            }
-
-            if (questions.length < 1) {
-                return res.json({ status: 300, success: false, error: "No questions found" });
-            }
-          
-            return res.json({ status: 200, data: questions, topic: topic, success: true });
-        });
+        return res.json({ status: 200, data: questions, topic: topic, success: true });
     });
 });
 
