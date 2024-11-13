@@ -56,8 +56,29 @@ async function fetchData() {
             if (count + 1 < jsonArray.length) {
                 console.log(jsonArray[count]);
                 count++;
-                displayQuestion(jsonArray[count], ansArray);
-                $("#complete-questions").text(count + 1);
+                // I added a delay before we change the question so the audio can finish before the new question is displayed and the animation starts
+                setTimeout(() => {
+                    displayQuestion(jsonArray[count], ansArray);
+                    $("#complete-questions").text(count);
+                }, 400);
+
+                // after new question is displayed remove overlay
+                setTimeout(() => {
+                    $("#overlay").css("display", "none");
+                }, 300);
+            } else {
+                // handle the end of the game
+                setTimeout(() => {
+                    // increment count
+                    $("#complete-questions").text(count + 1);
+                    // remove overlay
+                    $("#overlay").css("display", "none");
+                    // play animation to move answer options off screen
+                    playFallAnimation();
+
+                    endgameButtons();
+                },400);
+                // $("#overlay").css("background-color", "rgba(135, 206, 235, 0.5)");
             }
 
         });
@@ -96,7 +117,10 @@ function displayQuestion(questionObj, ansArray) {
     });
 
     // plays apple animation from animations.js. It is importnat to note that the animations.js file is called before this js file is called in the html pages
-    playAnswerAnimation();
+    // also I added a delay so the audio can finish before the animation starts
+    setTimeout(() => {
+        playAnswerAnimation();
+    }, 75);
 }
 
 function shuffle(array) {
@@ -104,4 +128,12 @@ function shuffle(array) {
       let j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
     }
+  }
+
+  function endgameButtons() {
+        let btn1 = $('<a>').text('Play Again!').addClass('btn btn-primary').attr("href", "/matching");
+        let btn2 = $('<a>').text('Flashcards').addClass('btn btn-success').attr("href", "/flashcards");
+        let btn3 = $('<a>').text('Home').addClass('btn btn-warning').attr("href", "/homepage");
+
+        $('#endgame-button-container').append(btn1, btn2, btn3);
   }
