@@ -9,6 +9,8 @@
 } */
 
 #homepage-body {
+    position: relative;
+    z-index: 0;
     background-color: rgba(149,229,250,255);
     font-family: Arial, sans-serif;
     display: flex;
@@ -16,6 +18,41 @@
     align-items: center;
     height: 100vh;
     margin: 0;
+}
+
+#card-container {
+    /* display: none; */
+    /* max-height: 400px;
+    overflow-y: auto; */
+    width: 120%;
+    margin: 50px;
+    /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); */
+
+}
+
+#list-group-container {
+    /* max-height: 400px; 
+    overflow-y: auto; */
+    max-height: 400px;
+    min-height: 200px;
+    min-width: 20em;
+    overflow-y: auto;
+}
+
+.list-group-item {
+    padding: 20px 60px;
+    display: none;
+    /* background-color: rgba(149,229,250,255); */
+    font-size: 1.25em;
+    border-radius: 8px;
+}
+
+.list-group-item:hover {
+    background-color: rgba(100, 255, 120, 0.1);
+}
+
+#topic-header {
+    font-size: 1.5em;
 }
 
 .container {
@@ -75,6 +112,8 @@ button {
 
 button:hover {
     background-color: #0056b3;
+    transform: scale(1.05);
+    transition: transform 0.2s;
 }
 
 #home-container {
@@ -149,4 +188,33 @@ button:hover {
 
 .pink {
     background-color: pink;
+}
+
+#create-button {
+    padding: 15px 80px;
+    text-decoration: none;
+    font-size: 4vh;
+}
+
+#create-button {
+    transform: scale(1.05);
+    transition: transform 0.2s;
+}
+
+.subject-button {
+    font-size: 3vh;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.subject-image {
+    width: 20%; 
+    /* height: 40%; */
+}
+
+#topic-header {
+    font-size: 1.5em;
+    font-weight: 600;
 }
