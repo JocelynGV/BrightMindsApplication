@@ -1,5 +1,9 @@
 $(document).ready(function () {
     fetchData();
+
+    
+     // if the user clicks on the play again button, restart flashcard game
+     playAgainButtonisClicked();
 });
 
 // Declare and Initalize variables
@@ -65,8 +69,9 @@ function showNext() {
         updateFlashcard(currentIndex);
         updateProgressBar();
     } else {
-        // if the user tries to go beyond the last flashcard
+        // if the user tries to go beyond the last flashcard, display congratulation pop
         console.log("Already at the last flashcard.");
+        $('#congratulationsModal').modal('show');
     }
 }
 
@@ -87,4 +92,15 @@ function shuffle(array) {
 
 function playAudio(url) {
     new Audio(url).play();
+}
+
+function playAgainButtonisClicked() {
+    // if play Again button is clicked Restart the flashcards
+    $('#playAgainButton').click(function () {
+        currentIndex = 0;
+        updateFlashcard(currentIndex);
+        shuffle(jsonArray);
+        updateProgressBar();
+        $('#congratulationsModal').modal('hide');
+    });
 }
