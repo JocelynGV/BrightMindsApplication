@@ -118,11 +118,16 @@
     // });
 
     function checkTopic() {
-        var result = confirm('You already used this topic name');
-
-        if (result == false) {
-            event.preventDefault();
+        var formTopic = $("#topic").val();
+        if (topicNames.includes(formTopic)) {
+            console.log("error");
+           // alert("you already used this topic name");
+            var result = confirm('You already used this topic name');
+            if (result == false) {
+                event.preventDefault();
+            }
         }
+
     }
 </script>
 
