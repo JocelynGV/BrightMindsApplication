@@ -1,7 +1,6 @@
 body {
   background-color: #e0f7fa; 
   color: #01579b; 
-  padding-top: 10px;
 }
 
 .card {
@@ -15,14 +14,14 @@ input[type='checkbox'] {
 }
 
 .container {
-  padding-top: 5%;
+  padding-top: 2%;
 }
 
 .card-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 5%;
+  padding-top: 2%;
   padding-bottom: 5%;
 }
 
