@@ -11,6 +11,10 @@ let currentIndex = 0;
 let jsonArray = [];
 let topic = "";
 
+// Declare and Initialize variables for confetti animinations
+const canvas = document.querySelector('#confetti');
+const jsConfetti = new JSConfetti()
+
 async function fetchData() {
     try {
 
@@ -77,6 +81,8 @@ function showNext() {
         // if the user tries to go beyond the last flashcard, display congratulation pop
         console.log("Already at the last flashcard.");
         $('#congratulationsModal').modal('show');
+        playConfetti();
+        jsConfetti.addConfetti();
     }
 }
 
@@ -96,6 +102,11 @@ function shuffle(array) {
 }
 
 function playAudio(url) {
+    new Audio(url).play();
+}
+
+function playConfetti() {
+    const url = '/audio/confetti.mp3'
     new Audio(url).play();
 }
 
