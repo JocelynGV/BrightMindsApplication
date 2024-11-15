@@ -23,7 +23,8 @@
 
     <div id="create-body">
         <div class="form-container">
-            <form action="/create" method="POST">
+            <form id="createForm" action="/create" method="POST">
+                <!-- <form id="createForm" method="POST"> -->
                 <label for="subject">Subject:</label>
                 <select id="subject" name="subject" required>
                     <option value="Math">Math</option>
@@ -51,7 +52,7 @@
                 </table>
 
                 <button type="button" class="add-btn" onclick="addRow()">Add Question</button>
-                <button id="submit" type="submit" class="save-btn" onclick="checkTopic()" disabled>Save</button>
+                <button id="submit" type="submit" class="save-btn" onclick="checkTopic()">Save</button>
 
             </form>
         </div>
@@ -75,8 +76,23 @@
                 Save!!
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="Home">Home</button>
-                <a class="btn btn-secondary" href="/matching" role="button">Match</a>
+                <!-- <button type="button" class="btn btn-primary" id="Home">Home</button>
+                <a class="btn btn-secondary" href="/matching" role="button">Match</a> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Error Modal -->
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="errorModalBody">
+                An error occurred while saving your data. Please try again.
             </div>
         </div>
     </div>
