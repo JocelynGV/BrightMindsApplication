@@ -1,4 +1,8 @@
-$(document).ready(function() {
+// Declare and Initialize variables for confetti animinations
+const canvas = document.querySelector('#confetti');
+const jsConfetti = new JSConfetti();
+
+$(document).ready(function () {
     // Add function to whichever button has been clicked
     // $('.answer-option').click(function() {
     //     var answerText = $(this).find('.answer-text').text();
@@ -51,9 +55,9 @@ async function fetchData() {
         var redWidth = 0, greenWidth = 0;
 
         // onClick function for when an answer is selected
-        $('.answer-option').click(function() {
+        $('.answer-option').click(function () {
             var answerText = $(this).find('.answer-text').text();
-            
+
             // handle correct and incorrect answers
             if (jsonArray[count].answer == answerText) {
                 // play correct audio 
@@ -74,7 +78,7 @@ async function fetchData() {
                 // play incorrect audio 
                 var audio = new Audio("../assets/incorrect.mp3");
                 audio.play();
-                
+
                 // increase progress bar
                 redWidth += widthPercent;
                 $("#progress-red").attr("style", `width: ${encodeURIComponent(redWidth)}%`);
@@ -113,7 +117,9 @@ async function fetchData() {
 
                     var percentCorrect = correctCount / (count + 1) * 100;
                     endgameButtons(percentCorrect);
-                },400);
+                    playConfetti(); // play confetti sounds
+                    jsConfetti.addConfetti(); // display confetti visuals
+                }, 400);
                 // $("#overlay").css("background-color", "rgba(135, 206, 235, 0.5)");
             }
 
@@ -146,9 +152,9 @@ function displayQuestion(questionObj, ansArray) {
     }
     // shuffle answer options array. Im making this up as I go along
     shuffle(ansOptionsArr);
-    
+
     // now populate answer options in html
-    $(".answer-text").each(function(index) {
+    $(".answer-text").each(function (index) {
         $(this).text(ansOptionsArr[index]);
     });
 
@@ -161,8 +167,8 @@ function displayQuestion(questionObj, ansArray) {
 
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
     }
 }
 
@@ -176,14 +182,19 @@ function endgameButtons(percentCorrect) {
         $("#question").html(randomAffirmations[randomIndex] + " You got <span style = 'color: green'>" + percentCorrect + "%</span>");
     } else {
         let randomIndex = Math.floor(Math.random() * encouragingAffirmations.length);
-        $("#question").html(encouragingAffirmations[randomIndex] +  " You got <span style = 'color: red'>" + percentCorrect + "%</span>");
+        $("#question").html(encouragingAffirmations[randomIndex] + " You got <span style = 'color: red'>" + percentCorrect + "%</span>");
     }
 
     // Create html buttons
-        let btn1 = $('<a>').text('Play Again!').addClass('btn btn-primary').attr("href", "/matching");
-        let btn2 = $('<a>').text('Flashcards').addClass('btn btn-success').attr("href", "/flashcards");
-        let btn3 = $('<a>').text('Home').addClass('btn btn-warning').attr("href", "/homepage");
+    let btn1 = $('<a>').text('Play Again!').addClass('btn btn-primary').attr("href", "/matching");
+    let btn2 = $('<a>').text('Flashcards').addClass('btn btn-success').attr("href", "/flashcards");
+    let btn3 = $('<a>').text('Home').addClass('btn btn-warning').attr("href", "/homepage");
 
 
-        $('#endgame-button-container').append(btn1, btn2, btn3);
-  }
+    $('#endgame-button-container').append(btn1, btn2, btn3);
+}
+
+function playConfetti() {
+    const url = '/audio/confetti.mp3'
+    new Audio(url).play();
+}
