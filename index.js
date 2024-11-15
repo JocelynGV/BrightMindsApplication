@@ -26,7 +26,7 @@ const db = new sqlite3.Database('public/js/my-database.db', (err) => {
 });
 
 // include middleware to process forms (gives the request a body)
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(_dirname + '/public'));
 // app.use('/node_modules', express.static(_dirname + '/node_modules'));
@@ -53,7 +53,7 @@ app.post("/create", (req, res) => {
         sqlTopic.finalize();
 
         const sqlGetTopicId = "SELECT tID FROM topics WHERE name = ?";
-    
+
         db.get(sqlGetTopicId, [json.topic], (err, row) => {
             if (err) {
                 console.error("Error fetching tID:", err);
@@ -71,21 +71,29 @@ app.post("/create", (req, res) => {
 
             console.log("Found tID:", topicId);
 
-            
-        for (let i = 0; i < json.questions.length; i++) {
-            const questionsArray = json.questions;
-            const answersArray = json.answers; 
-            console.log(topicId);
-            const sqlQuestions = db.prepare(`INSERT INTO questions (tID, question, answer) VALUES (?, ?, ?)`);
-            sqlQuestions.run(topicId, questionsArray[i], answersArray[i]);
-            sqlQuestions.finalize();
-        }
+
+            for (let i = 0; i < json.questions.length; i++) {
+                const questionsArray = json.questions;
+                const answersArray = json.answers;
+                console.log(topicId);
+                const sqlQuestions = db.prepare(`INSERT INTO questions (tID, question, answer) VALUES (?, ?, ?)`);
+                sqlQuestions.run(topicId, questionsArray[i], answersArray[i]);
+            }
+
+            // sqlQuestions.finalize((err) => {
+            //     if (err) {
+            //         console.error("Error finalizing questions insertion:", err);
+            //         return res.json({ status: 500, success: false, error: err.message });
+            //     }
+            //     console.log("All data inserted successfully");
+            //     res.json({ status: 200, success: true, message: "Data inserted successfully" });
+            // });
 
         });
         // const stmt = db.prepare(`INSERT INTO subjects (subject_name) VALUES (?)`);
         // stmt.run('English');
         // stmt.finalize();    
-     });
+    });
 });
 
 app.get("/login", (req, res) => {
@@ -110,7 +118,7 @@ app.get("/matching", (req, res) => {
 });
 
 app.get("/matching/:topic", (req, res) => {
-    topic = req.params.topic;   
+    topic = req.params.topic;
     console.log(topic);
     res.sendFile(_dirname + "/public/matching.html");
 });
@@ -146,7 +154,7 @@ app.get("/topics", (req, res) => {
         }
 
         return res.json({ status: 200, data: rows, success: true });
-    }); 
+    });
 });
 
 app.get("/topics/:subject", (req, res) => {
@@ -164,7 +172,7 @@ app.get("/topics/:subject", (req, res) => {
         }
 
         return res.json({ status: 200, data: rows, success: true });
-    }); 
+    });
 });
 
 // let sql;
