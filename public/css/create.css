@@ -8,7 +8,7 @@
     background-color: #f0f0f0;
 }
 
-.btn {
+/* .btn {
     background-color: DodgerBlue;
     border: none;
     color: white;
@@ -21,7 +21,7 @@
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-}
+} */
 
 .btn:hover {
     background-color: RoyalBlue;
