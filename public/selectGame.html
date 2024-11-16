@@ -14,20 +14,28 @@
 <body>
     <div class="container">
 
-        <h1 id="topic" class="topic">Multiplication</h1>
+        <h1 id="topic" class="topic">Addition</h1>
         <label>Select Match or Flashcards</label>
         <div class="game-selection">
-            <a class="btn btn-primary btn-lg" tabindex="-1" role="button" id="matching">Match</a>
-            <a class="btn btn-secondary btn-lg " tabindex="-1" role="button" aria-disabled="true" id="flashcards">FlashCards</a>
+            <a class="btn btn-primary" href="/matching" role="button" id="matching">Match</a>
+            <a class="btn btn-secondary" href="/flashcards" role="button" id="flashcards">Flashcards</a>
         </div>
         <div class ="flashcard-set">
-
         </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
-        const topic = $("#topic").text().trim();
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // just dont want to have a null page
+        var topic = $("#topic").text().trim();
+        if (urlParams.get('topic') != null) {
+            topic = urlParams.get('topic');
+        } 
+        console.log(topic);
+
+        $("#topic").text(topic);
         alert(topic);
         $("#matching").attr("href", `/matching/${encodeURIComponent(topic)}`);
         $("#flashcards").attr("href", `/flashcards/${encodeURIComponent(topic)}`);

@@ -24,6 +24,7 @@
 #answer-container {
     min-width: 50%;
     max-width: fit-content;
+    height: 50vh;
 }
 
 .answer-option {
@@ -76,4 +77,6 @@
 #endgame-button-container .btn {
     padding: 20px;
     margin: 20px;
+    font-size: 4vh;
+    font-weight: bold;
 }

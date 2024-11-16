@@ -1,4 +1,8 @@
-$(document).ready(function() {
+// Declare and Initialize variables for confetti animinations
+const canvas = document.querySelector('#confetti');
+const jsConfetti = new JSConfetti();
+
+$(document).ready(function () {
     // Add function to whichever button has been clicked
     // $('.answer-option').click(function() {
     //     var answerText = $(this).find('.answer-text').text();
@@ -14,6 +18,7 @@ $(document).ready(function() {
 //     .then(users => console.log(users));
 
 var count = 0;
+var correctCount = 0;
 async function fetchData() {
     try {
         const response = await fetch('/cards');
@@ -50,9 +55,9 @@ async function fetchData() {
         var redWidth = 0, greenWidth = 0;
 
         // onClick function for when an answer is selected
-        $('.answer-option').click(function() {
+        $('.answer-option').click(function () {
             var answerText = $(this).find('.answer-text').text();
-            
+
             // handle correct and incorrect answers
             if (jsonArray[count].answer == answerText) {
                 // play correct audio 
@@ -66,11 +71,14 @@ async function fetchData() {
                 // add overlay
                 $("#overlay").css("display", "block");
                 $("#overlay").css("background-color", "rgba(0, 255, 0, 0.5)");
+
+                // increase correct count
+                correctCount++;
             } else {
-                // play correct audio 
+                // play incorrect audio 
                 var audio = new Audio("../assets/incorrect.mp3");
                 audio.play();
-                
+
                 // increase progress bar
                 redWidth += widthPercent;
                 $("#progress-red").attr("style", `width: ${encodeURIComponent(redWidth)}%`);
@@ -107,8 +115,11 @@ async function fetchData() {
                     // play animation to move answer options off screen
                     playFallAnimation();
 
-                    endgameButtons();
-                },400);
+                    var percentCorrect = correctCount / (count + 1) * 100;
+                    endgameButtons(percentCorrect);
+                    playConfetti(); // play confetti sounds
+                    jsConfetti.addConfetti(); // display confetti visuals
+                }, 400);
                 // $("#overlay").css("background-color", "rgba(135, 206, 235, 0.5)");
             }
 
@@ -141,9 +152,9 @@ function displayQuestion(questionObj, ansArray) {
     }
     // shuffle answer options array. Im making this up as I go along
     shuffle(ansOptionsArr);
-    
+
     // now populate answer options in html
-    $(".answer-text").each(function(index) {
+    $(".answer-text").each(function (index) {
         $(this).text(ansOptionsArr[index]);
     });
 
@@ -156,15 +167,34 @@ function displayQuestion(questionObj, ansArray) {
 
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
     }
-  }
+}
 
-  function endgameButtons() {
-        let btn1 = $('<a>').text('Play Again!').addClass('btn btn-primary').attr("href", "/matching");
-        let btn2 = $('<a>').text('Flashcards').addClass('btn btn-success').attr("href", "/flashcards");
-        let btn3 = $('<a>').text('Home').addClass('btn btn-warning').attr("href", "/homepage");
+function endgameButtons(percentCorrect) {
+    // randomly generate encouraging messages to display at the end screen
+    var randomAffirmations = ["Good Job!", "Great job!", "Yay!!", "Hurray!", "Wow!!"];
+    var encouragingAffirmations = ["Good try!", "Try again!"];
 
-        $('#endgame-button-container').append(btn1, btn2, btn3);
-  }
+    if (percentCorrect > 50) {
+        let randomIndex = Math.floor(Math.random() * randomAffirmations.length);
+        $("#question").html(randomAffirmations[randomIndex] + " You got <span style = 'color: green'>" + percentCorrect + "%</span>");
+    } else {
+        let randomIndex = Math.floor(Math.random() * encouragingAffirmations.length);
+        $("#question").html(encouragingAffirmations[randomIndex] + " You got <span style = 'color: red'>" + percentCorrect + "%</span>");
+    }
+
+    // Create html buttons
+    let btn1 = $('<a>').text('Play Again!').addClass('btn btn-primary').attr("href", "/matching");
+    let btn2 = $('<a>').text('Flashcards').addClass('btn btn-success').attr("href", "/flashcards");
+    let btn3 = $('<a>').text('Home').addClass('btn btn-warning').attr("href", "/homepage");
+
+
+    $('#endgame-button-container').append(btn1, btn2, btn3);
+}
+
+function playConfetti() {
+    const url = '/audio/confetti.mp3'
+    new Audio(url).play();
+}

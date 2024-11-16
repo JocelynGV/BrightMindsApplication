@@ -41,6 +41,7 @@
         // delay: anime.stagger(100, {start: 600})
         delay: anime.stagger(50, {start: 100})
       });
+    
   }
 
   function playEndingAnimation() {
