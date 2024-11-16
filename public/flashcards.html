@@ -13,12 +13,13 @@
 
 <body>
     <!-- Navbar -->
+    <canvas id="confetti"></canvas>
     <h1 class="topic text-center" id="topic">Topic</h1>
     <div class="container">
         <!-- Progress Bar -->
         <div class="d-flex justify-content-center">
             <div class="progress" id="progressContainer">
-                <div id="dynamic" class="progress-bar progress-bar-success progress-bar-striped active"
+                <div id="dynamic" class="progress-bar progress-bar-success progress-bar-striped active bg-success"
                     role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
                 </div>
             </div>
@@ -57,6 +58,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
     <!-- <script src="/js/animations.js"></script> -->
     <script src="/js/flashCards.js"></script>
 </body>
@@ -64,12 +66,12 @@
 </html>
 
 <!-- Congratulations Modal -->
-<div class="modal fade" id="congratulationsModal" tabindex="-1" aria-labelledby="congratulationsModalLabel" aria-hidden="true">
+<div class="modal fade" id="congratulationsModal" tabindex="-1" aria-labelledby="congratulationsModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="congratulationsModalLabel">Congratulations!</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 🎉 You've completed all the flashcards!
