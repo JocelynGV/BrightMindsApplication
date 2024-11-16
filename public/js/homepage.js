@@ -44,3 +44,13 @@ function populateTopicNames(jsonArray) {
     // display subject name
     $("#topic-header").text("\n" + subject + "\n");
 }
+
+// add event listener to navbar to display the create button
+document.querySelector('my-navbar').addEventListener('toggle-switch-changed', (event) => {
+    const button = document.querySelector('#create-button');
+    if (event.detail.checked) {
+        button.style.display = 'block';
+      } else {
+        button.style.display = 'none';
+      }
+  });

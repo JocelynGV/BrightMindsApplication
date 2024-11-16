@@ -1,6 +1,6 @@
 class myNavbar extends HTMLElement {
   constructor() {
-    super()
+    super();
     this.innerHTML = `
     <style>
     .switch {
@@ -56,8 +56,17 @@ class myNavbar extends HTMLElement {
     .slider.round:before {
       border-radius: 50%;
     }
+    #switch-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin-right: 40px;
+      position: absolute;
+      right: 0;
+    }
     </style>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;">
+    <nav id="the-navbar" class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;">
         <a class="navbar-brand" href="/homepage">
             <img src="assets/lightbulb.png" width="30" height="30" class="d-inline-block align-top" alt="">
             Bright Minds
@@ -75,11 +84,11 @@ class myNavbar extends HTMLElement {
               <a class="nav-link" href="#">Link</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Subjects
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Math</a>
+                <a class="dropdown-item" href="/homepage">Math</a>
                 <a class="dropdown-item" href="#">English</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Something else here</a>
@@ -89,35 +98,35 @@ class myNavbar extends HTMLElement {
               <a id="create-link" class="nav-link disabled" href="/create">Create</a>
             </li>
           </ul>
-          <!-- <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form> -->
-          x<a class="btn btn-light form-inline my-2 my-sm-0" onclick="this.closest('navbar').toggleDisabledLink()">I am a Parent/Teacher</a>
-                
-          <!-- Rounded switch -->
-            <label class="switch">
-            <input type="checkbox">
-            <span class="slider round"></span>
-          </label>
+          <div id="switch-container">
+            <label for="toggle-switch">I am a Parent/Teacher</label>
+
+          <label class="switch">
+            <input type="checkbox" id="toggle-switch">
+              <span class="slider round"></span>
+            </label>
+          </div>
         </div>
       </nav>
-    <script>
-        function toggleDisabledLink() {
-        // Select the disabled link
-        const link = document.getElementById('create-link');
-        
-        // Toggle the 'disabled' class
-        link.classList.remove('disabled');
-    }
-    </script>
     `;
-    this.toggleDisabledLink = this.toggleDisabledLink.bind(this);
-}
-toggleDisabledLink() {
-  const link = this.querySelector('#create-link');
-  link.classList.remove('disabled');
-}
+
+    this.toggleDisabledLink = this.toggleDisabledLink.bind(this);  // Bind method to custom element context
+    this.querySelector('#toggle-switch').addEventListener('change', this.toggleDisabledLink);
+  }
+
+  // Toggle the 'disabled' class for the 'create-link' element
+  toggleDisabledLink(event) {
+    const link = this.querySelector('#create-link');
+    if (event.target.checked) {
+      link.classList.remove('disabled');
+    } else {
+      link.classList.add('disabled');
+    }
+     // Dispatch a custom event
+     this.dispatchEvent(new CustomEvent('toggle-switch-changed', {
+      detail: { checked: event.target.checked }
+    }));
+  }
 }
 
 customElements.define("my-navbar", myNavbar);
