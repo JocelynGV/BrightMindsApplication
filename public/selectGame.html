@@ -61,6 +61,7 @@
 
         $("#topic").text(topic);
         //alert(topic);
+      
         // pass topic parameter to the game pages
         $("#matching").attr("href", `/matching/${encodeURIComponent(topic)}`);
         $("#flashcards").attr("href", `/flashcards/${encodeURIComponent(topic)}`);
