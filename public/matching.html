@@ -12,57 +12,58 @@
         <Title>Login Page</Title>
     </head>
 
-    <body>
+    <body id="matching-body">
         <div>
             <!-- <my-navbar></my-navbar> -->
         </div>
 
         <div id="overlay"></div>
 
+        <div id="main-container">
+            <h1 class="title" id="matching-topic">Matching</h1>
 
-        <h1 class="title" id="matching-topic">Matching</h1>
-
-        <div class="container-fluid" id="matching-container">
-            <div id="progress-container">
-                <div class="progress">
-                    <div id="progress-green" class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                    <div id="progress-red" class="progress-bar bg-danger" role="progressbar" style="width: 0%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                    <!-- <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div> -->
-                  </div>
-                <div id="numerical-progress">
-                    <span id="complete-questions"></span>/<span id="total-questions"></span>
-                </div>
-            </div>
-
-            <div id="question-container">
-                <p id="question" class="text-uppercase"></p>
-            </div>
-
-            <div id="endgame-button-container"></div>
-
-            <div id="answer-container">
-                <div class="row">
-                    <div id="option1" class="answer-option col">
-                        <img src="/assets/apple.webp" class="img-fluid appleImg">
-                        <div class="answer-text">1</div>
+            <div class="container-fluid" id="matching-container">
+                <div id="progress-container">
+                    <div class="progress">
+                        <div id="progress-green" class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div id="progress-red" class="progress-bar bg-danger" role="progressbar" style="width: 0%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                        <!-- <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div> -->
                     </div>
-                    <div id="option2" class="answer-option col">
-                        <img src="/assets/apple.webp" class="img-fluid appleImg">
-                        <div class="answer-text">2</div>
+                    <div id="numerical-progress">
+                        <span id="complete-questions"></span>/<span id="total-questions"></span>
                     </div>
                 </div>
-                
-                <div class="row">
-                    <div id="option3" class="answer-option col">
-                        <img src="/assets/apple.webp" class="img-fluid appleImg">
-                        <div class="answer-text">3</div>
-                    </div>
-                    <div id="option4" class="answer-option col">
-                        <img src="/assets/apple.webp" class="img-fluid appleImg">
-                        <div class="answer-text">4</div>
-                    </div>
+
+                <div id="question-container">
+                    <p id="question" class="text-uppercase"></p>
                 </div>
-                
+
+                <div id="endgame-button-container"></div>
+
+                <div id="answer-container">
+                    <div class="row">
+                        <div id="option1" class="answer-option col">
+                            <img src="/assets/apple.webp" class="img-fluid appleImg">
+                            <div class="answer-text">1</div>
+                        </div>
+                        <div id="option2" class="answer-option col">
+                            <img src="/assets/apple.webp" class="img-fluid appleImg">
+                            <div class="answer-text">2</div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div id="option3" class="answer-option col">
+                            <img src="/assets/apple.webp" class="img-fluid appleImg">
+                            <div class="answer-text">3</div>
+                        </div>
+                        <div id="option4" class="answer-option col">
+                            <img src="/assets/apple.webp" class="img-fluid appleImg">
+                            <div class="answer-text">4</div>
+                        </div>
+                    </div>
+                    
+                </div>
             </div>
         </div>
         <canvas id="confetti"></canvas>

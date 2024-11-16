@@ -8,9 +8,9 @@ function addRow() {
     const newRow = table.insertRow();
 
     newRow.innerHTML = `
-        <td><textarea name="questions[]" rows="2" cols="30" required></textarea></td>
-        <td><textarea name="answers[]" rows="2" cols="30" required></textarea></td>
-        <td><button type="button" class="remove-btn" onclick="removeRow(this)">Remove</button></td>
+        <td><textarea name="questions[]" rows="2" cols="30" required placeholder="Type your question here"></textarea></td>
+        <td><textarea name="answers[]" rows="2" cols="30" required placeholder="Type the answer here"></textarea></td>
+        <td><button type="button" class="remove-btn" onclick="removeRow(this)">❌ Remove</button></td>
     `;
 }
 
@@ -30,14 +30,20 @@ function removeRow(button) {
     row.parentNode.removeChild(row);
 }
 
-// function check() {
-//     var result = confirm('Are you sure you want to leave this page?');
+// Function to preview flashcards (you could replace this with real preview functionality)
+function previewFlashcards() {
+    alert("Previewing flashcards...");
+}
 
-//     if (result == false) {
-//         event.preventDefault();
-//     }
-// }
+function check() {
+    var result = confirm('Are you sure you want to leave this page?');
 
+    if (result == false) {
+        event.preventDefault();
+    }
+}
+
+// get list of topic names from database so we can use it to prevent the user from creating a card set with a preexisting topic name
 var topicNames = [];
 async function fetchData() {
     try {
@@ -58,24 +64,26 @@ async function fetchData() {
     }
 }
 
-// $("#submit").click(function() {
-
-//             var formTopic = $("#topic").val();
-//             if (topicNames.includes(formTopic)) {
-//                 console.log("error");
-//                 alert("you already used this topic name");
-//             }
-// });
-
 async function checkTopic() {
     var formTopic = $("#topic").val();
+    // where we check for unique topic names
     if (topicNames.includes(formTopic)) {
         console.log("error");
         // alert("you already used this topic name");
         var result = confirm('You already used this topic name');
-        if (result == false) {
+        // if (result == false) {
             event.preventDefault();
-        }
+            // $("#topic").val("");
+        // }
+    } else {
+        // save options to modal that allow the user to not click out of the modal
+        $('#saveModal').modal({
+            show: true,
+            backdrop: 'static',
+            keyboard: false
+        })
+        // then show modal
+        $('#saveModal').modal('show');
     }
 }
 
