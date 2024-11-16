@@ -61,10 +61,12 @@ class myNavbar extends HTMLElement {
       justify-content: center;
       align-items: center;
       gap: 20px;
-      margin-left: 40px;
+      margin-right: 40px;
+      position: absolute;
+      right: 0;
     }
     </style>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;">
+    <nav id="the-navbar" class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;">
         <a class="navbar-brand" href="/homepage">
             <img src="assets/lightbulb.png" width="30" height="30" class="d-inline-block align-top" alt="">
             Bright Minds
