@@ -11,13 +11,13 @@
         <Title>Login Page</Title>
     </head>
 
-    <body id="login-body">
+    <body>
         <div class="container">
             <img src="../assets/lightbulb.png" alt="Lightbulb" class="lightbulb img-thumbnail">
             <h1 class="title">BRIGHT MINDS</h1>
             <h2>Login</h2>
             <!-- <form onsubmit="handleLogin(event)"> -->
-            <form action="/submit" method="POST">
+            <form action="/homepage" method="GET">
                 <div class="input-group">
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username" required>
@@ -28,26 +28,10 @@
                 </div>
                 <button type="submit">Login</button>
             </form>
-
-            <div id="error-message" style="color: red;"></div>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
         <script src="login.js"></script>
-        <script>
-            // Function to get the value of a query parameter by name
-            function getQueryParam(param) {
-                const urlParams = new URLSearchParams(window.location.search);
-                return urlParams.get(param);
-            }
-    
-            // Check if there's an error message in the query string
-            const errorMessage = getQueryParam('error');
-            if (errorMessage) {
-                // Display the error message on the page
-                document.getElementById('error-message').innerText = errorMessage;
-            }
-        </script>
     </body>
 </html>

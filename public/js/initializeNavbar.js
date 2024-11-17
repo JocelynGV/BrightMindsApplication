@@ -3,24 +3,6 @@ class myNavbar extends HTMLElement {
     super();
     this.innerHTML = `
     <style>
-    nav {
-      position: sticky;
-      top: 0;
-    }
-    nav a {
-            color: #ffffff; /* Clean white text */
-            margin: 0 20px;
-            font-weight: 500; /* Medium weight for readability */
-            text-decoration: none;
-            font-size: 1.1rem;
-            padding: 8px 15px; /* Add padding for better clickability */
-            border-radius: 5px; /* Rounded hover effect */
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-    nav a:hover {
-            background-color: #ffcc00; /* Highlight with gold on hover */
-            color: #0056b3; /* Contrast text on hover */
-        }
     .switch {
       position: relative;
       display: inline-block;
@@ -96,16 +78,24 @@ class myNavbar extends HTMLElement {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="/homepage">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/about">About</a>
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Subjects
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/homepage">Math</a>
+                <a class="dropdown-item" href="#">English</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
             </li>
             <li class="nav-item">
               <a id="create-link" class="nav-link disabled" href="/create">Create</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/login">Login</a>
             </li>
           </ul>
           <div id="switch-container">
