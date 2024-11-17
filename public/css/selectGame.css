@@ -48,6 +48,10 @@ label {
     margin-top: 20px;
 }
 
+#cardsetTable {
+    width: 50%
+}
+
 #home-btn {
     background-color: #ff6600;
     border: none;

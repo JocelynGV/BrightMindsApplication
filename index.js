@@ -81,6 +81,11 @@ app.post("/submit", async (req, res) => {
 //     res.sendFile(_dirname + "/public/homepage.html");
 // });
 
+app.get("/about", (req, res) => {
+    console.log(_dirname + "/public/about.html");
+    res.sendFile(_dirname + "/public/about.html");
+});
+
 app.get("/homepage", (req, res) => {
     console.log(_dirname + "/public/homepage.html");
     res.sendFile(_dirname + "/public/homepage.html");
