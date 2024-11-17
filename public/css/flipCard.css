@@ -110,3 +110,22 @@ input[type='checkbox']:checked+.card-container .card-flip {
 .modal-footer .btn:hover {
   opacity: 0.8;
 }
+
+#home-btn {
+  background-color: #ff6600;
+  border: none;
+  color: white;
+  padding: 15px;
+  font-size: 18px;
+  cursor: pointer;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 50%;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
