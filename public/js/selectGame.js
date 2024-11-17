@@ -1,14 +1,13 @@
-$(document).ready( function () {
+$(document).ready(function () {
     const table = $('#cardsetTable').DataTable({
         // searching: false,  
-        paging: true,      
-        info: true,        
+        paging: true,
+        info: true,
         lengthChange: false
     });
 
     fetchData();
-} );
-
+});
 
 async function fetchData() {
     try {
@@ -29,7 +28,7 @@ async function fetchData() {
 
         // Redraw the table
         table.draw();
-    
+
     } catch (error) {
         console.log(error);
     }

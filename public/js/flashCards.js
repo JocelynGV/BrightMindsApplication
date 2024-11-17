@@ -1,9 +1,8 @@
 $(document).ready(function () {
     fetchData();
 
-    
-     // if the user clicks on the play again button, restart flashcard game
-     playAgainButtonisClicked();
+    // if the user clicks on the play again button, restart flashcard game
+    playAgainButtonisClicked();
 });
 
 // Declare and Initalize variables
