@@ -1,22 +1,5 @@
 $(document).ready(function () {
     fetchData();
-
-    $("#createForm").on("submit", function(event) {
-        // Perform validation using checkTopic
-        const shouldPreventDefault = checkTopic();
-
-        if (shouldPreventDefault) {
-            event.preventDefault(); // Prevent form submission if validation fails
-        } else {
-            $('#saveModal').modal({
-                show: true,
-                backdrop: 'static',
-                keyboard: false
-            });
-            $('#saveModal').modal("show");
-        }
-        // If validation succeeds, the form will naturally be submitted
-    });
 });
 
 // Function to add a new row to the table
@@ -81,35 +64,27 @@ async function fetchData() {
     }
 }
 
-function checkTopic() {
+async function checkTopic() {
     var formTopic = $("#topic").val();
-    var preventSubmit = false; // Default to not preventing submission
-
-    // Check if the topic name is unique
+    // where we check for unique topic names
     if (topicNames.includes(formTopic)) {
-        alert("You already used this topic name.");
-        preventSubmit = true; // Prevent submission if topic is not unique
+        console.log("error");
+        // alert("you already used this topic name");
+        var result = confirm('You already used this topic name');
+        // if (result == false) {
+            event.preventDefault();
+            // $("#topic").val("");
+        // }
+    } else {
+        // save options to modal that allow the user to not click out of the modal
+        $('#saveModal').modal({
+            show: true,
+            backdrop: 'static',
+            keyboard: false
+        })
+        // then show modal
+        $('#saveModal').modal('show');
     }
-
-    // Check that all fields are filled
-    $("textarea[name='questions[]']").each(function() {
-        if ($(this).val().trim() === "") {
-            alert("Please fill out all questions.");
-            preventSubmit = true; // Prevent submission if any question is empty
-            return false; // Break the loop
-        }
-    });
-
-    $("textarea[name='answers[]']").each(function() {
-        if ($(this).val().trim() === "") {
-            alert("Please fill out all answers.");
-            preventSubmit = true; // Prevent submission if any answer is empty
-            return false; // Break the loop
-        }
-    });
-
-    // Return true to prevent default form submission, false to allow
-    return preventSubmit;
 }
 
 // function disableSaveButton() {

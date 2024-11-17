@@ -3,8 +3,6 @@ import bodyParser from "body-parser";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import sqlite3 from 'sqlite3';
-import bcrypt from 'bcrypt';
-import fs from 'fs';
 
 //import bcrypt from bcrypt;
 // import anime from 'animejs'
@@ -32,59 +30,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(_dirname + '/public'));
 // app.use('/node_modules', express.static(_dirname + '/node_modules'));
-
-app.get("/login", (req, res) => {
-    console.log(_dirname + "/public/login.html");
-    res.sendFile(_dirname + "/public/login.html");
-});
-
-app.post("/submit", async (req, res) => {
-    // console.log(_dirname + "/public/login.html");
-    // res.sendFile(_dirname + "/public/login.html");
-
-    console.log(req.body);
-    // const user = {};
-    try {
-        // Read the JSON file asynchronously
-        const fileLocation = _dirname + '/data/users.json';
-        console.log(fileLocation);
-        const data = await fs.promises.readFile(fileLocation);
-        // Parse the JSON string into an object
-        const jsonData = JSON.parse(data);
-        // res.json(jsonData);
-        const user = jsonData.find(user => user.username === req.body.username);
-
-        if (user == null) {
-            console.log("User not found");
-            return res.redirect('/login?error=User not found');
-        }
-
-        console.log(user.username);
-        console.log(user.password);
-
-        if (user.password != req.body.password) {
-            console.log("Incorrect Password");
-            return res.redirect('/login?error=Incorrect Password');
-        } else {
-            res.sendFile(_dirname + "/public/homepage.html");
-        }
-        
-    } catch (error) {
-        console.error('Error reading JSON file:', error);
-        res.status(500).send('Error reading JSON file');
-    }
-});
-
-
-// app.post("/submit", (req, res) => {
-//     console.log(req.body);
-//     res.sendFile(_dirname + "/public/homepage.html");
-// });
-
-app.get("/about", (req, res) => {
-    console.log(_dirname + "/public/about.html");
-    res.sendFile(_dirname + "/public/about.html");
-});
 
 app.get("/homepage", (req, res) => {
     console.log(_dirname + "/public/homepage.html");
@@ -151,6 +96,10 @@ app.post("/create", (req, res) => {
     });
 });
 
+app.get("/login", (req, res) => {
+    console.log(_dirname + "/public/login.html");
+    res.sendFile(_dirname + "/public/login.html");
+});
 
 app.get("/flashcards", (req, res) => {
     console.log(_dirname + "/public/flashcards.html");
@@ -186,6 +135,11 @@ app.get("/selectGame", (req, res) => {
 //     console.log(_dirname + "/public/selectGame.html");
 //     res.sendFile(_dirname + "/public/selectGame.html");
 // });
+
+
+app.post("/submit", (req, res) => {
+    console.log(req.body);
+});
 
 app.get("/topics", (req, res) => {
     const sql = "SELECT * FROM topics"
