@@ -1,10 +1,9 @@
 $(document).ready( function () {
     const table = $('#cardsetTable').DataTable({
-        searching: false,  
+        // searching: false,  
         paging: true,      
         info: true,        
-        lengthChange: false, 
-        scrollX: true      
+        lengthChange: false
     });
 
     fetchData();
