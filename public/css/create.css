@@ -6,6 +6,8 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #fffbcc; /* Light yellow background */
+    max-height: 100vh; 
+    overflow-y: auto; 
 }
 
 #home-btn {
@@ -35,6 +37,8 @@ body {
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border: 2px solid #ffcc00;
+    max-height: 100vh; 
+    overflow-y: auto; 
 }
 
 label {
@@ -103,10 +107,4 @@ tbody tr:nth-child(even) {
 
 .add-btn:hover, .remove-btn:hover, .preview-btn:hover, .save-btn:hover {
     opacity: 0.9;
-}
-
-#save-modal {
-    position:fixed;
-    left: 50%;
-    top: 50%;
 }

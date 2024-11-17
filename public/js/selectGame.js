@@ -1,7 +1,14 @@
 $(document).ready( function () {
-    $('#cardsetTable').DataTable();
+    const table = $('#cardsetTable').DataTable({
+        // searching: false,  
+        paging: true,      
+        info: true,        
+        lengthChange: false
+    });
+
     fetchData();
 } );
+
 
 async function fetchData() {
     try {
@@ -10,24 +17,18 @@ async function fetchData() {
         const json = data.data;
         console.log(json);
 
-        // add rows
-        const tbody = $("#cardsetTable tbody");
-        for (row of json) {
-            // Create a new row
-            const newRow = $('<tr></tr>');
-            
-            // Create two new columns (table data)
-            const newColumn1 = $('<td></td>').text(row.question);
-            const newColumn2 = $('<td></td>').text(row.answer);
-            
-            // Append the columns to the new row
-            newRow.append(newColumn1);
-            newRow.append(newColumn2);
-            
-            // Append the new row to the table body
-            $('#cardsetTable tbody').append(newRow);
-        }
+        const table = $('#cardsetTable').DataTable();
 
+        // Clear existing rows before adding new ones
+        table.clear();
+
+        // Add new rows
+        json.forEach(row => {
+            table.row.add([row.question, row.answer]);
+        });
+
+        // Redraw the table
+        table.draw();
     
     } catch (error) {
         console.log(error);

@@ -1,11 +1,21 @@
 var subject = "";
 
+$(document).ready(function() {
+    // Search functionality for filtering list items
+    $('#searchInput').on('keyup', function() {
+        var value = $(this).val().toLowerCase();
+        $('#topic-list a').filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+        });
+    });
+
 // filter topics by subject
-$(".subject-button").click(function() {
-    // console.log("hello");
-    subject = $(this).val().trim();
-    fetchData();
-})
+    $(".subject-button").click(function() {
+        subject = $(this).val().trim();
+        console.log('Selected Subject: ', subject);  // Debugging line to confirm value
+        fetchData();
+    });
+});
 
 async function fetchData() {
     try {
@@ -21,29 +31,26 @@ async function fetchData() {
         console.log(err);
     }
 };
-
 function populateTopicNames(jsonArray) {
+    // Clear the existing topic list
     $('#topic-list').empty();
     
-    for (obj of jsonArray) {
-        var name = obj.name;
-        console.log(name);
-        // let listObj = $('<a>').text(name).addClass('list-group-item').attr("href", `/selectGame/${encodeURIComponent(name)}`);
-        let urlObj = $('<a>').text(name).attr("href", `/selectGame?topic=${encodeURIComponent(name)}`).addClass('list-group-item');
-        let listObj = $('<li>').addClass('list-group-item');
-        
-        // listObj.append(urlObj);
-        // urlObj.append(listObj);
-        
+    // Loop through the fetched topics and append them to the list
+    for (const obj of jsonArray) {
+        const name = obj.name;  // Assuming each topic has a 'name' property
+        console.log('Topic Name: ', name);
+
+        // Create a list item with a link
+        const urlObj = $('<a>').text(name).attr("href", `/selectGame?topic=${encodeURIComponent(name)}`).addClass('list-group-item');
         $('#topic-list').append(urlObj);
     }
 
-    // display all items in list
+    // Show all items in the list (if hidden)
     $(".list-group-item").css("display", "block");
 
-    // display subject name
-    $("#topic-header").text("\n" + subject + "\n");
-}
+    // Update the header to display the current subject
+    $("#topic-header").text(subject);
+}   
 
 // add event listener to navbar to display the create button
 document.querySelector('my-navbar').addEventListener('toggle-switch-changed', (event) => {
