@@ -1,0 +1,72 @@
+body, html {
+    height: 100%;
+    background-color:rgb(200, 247, 197);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+#body-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    text-align: center;
+    max-width: 600px;
+    padding: 20px;
+}
+
+h1.topic {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.game-selection {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.game-selection .btn {
+    font-size: 1.5rem;
+    padding: 15px 30px;
+}
+
+.flashcard-set {
+    margin-top: 20px;
+}
+
+#cardsetTable {
+    width: 50%
+}
+
+#home-btn {
+    background-color: #ff6600;
+    border: none;
+    color: white;
+    padding: 15px;
+    font-size: 18px;
+    cursor: pointer;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 50%;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

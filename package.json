@@ -12,8 +12,16 @@
   "description": "",
   "dependencies": {
     "animejs": "^3.2.2",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.3",
     "bootstrap": "^5.3.3",
+    "ejs": "^3.1.10",
+    "esm": "^3.2.25",
     "express": "^4.21.1",
-    "mongoose": "^8.7.2"
+    "js-confetti": "^0.12.0",
+    "mongoose": "^8.7.2",
+    "nodemon": "^3.1.7",
+    "save": "^2.9.0",
+    "sqlite3": "^5.1.7"
   }
 }

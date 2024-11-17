@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/matching.css">
+    <script defer src="/js/initializeNavbar.js"></script>
+    <Title>Login Page</Title>
+</head>
+
+<body id="matching-body">
+    <div id="overlay"></div>
+    <div id="main-container">
+        <h1 class="title" id="matching-topic">Matching</h1>
+        <div class="container-fluid" id="matching-container">
+            <div id="progress-container">
+                <div class="progress">
+                    <div id="progress-green" class="progress-bar bg-success" role="progressbar" style="width: 0%"
+                        aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div id="progress-red" class="progress-bar bg-danger" role="progressbar" style="width: 0%"
+                        aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                    <!-- <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div> -->
+                </div>
+                <div id="numerical-progress">
+                    <span id="complete-questions"></span>/<span id="total-questions"></span>
+                </div>
+            </div>
+            <div id="question-container">
+                <p id="question" class="text-uppercase"></p>
+            </div>
+
+            <div id="endgame-button-container"></div>
+
+            <div id="answer-container">
+                <div class="row">
+                    <div id="option1" class="answer-option col">
+                        <img src="/assets/apple.webp" class="img-fluid appleImg">
+                        <div class="answer-text">1</div>
+                    </div>
+                    <div id="option2" class="answer-option col">
+                        <img src="/assets/apple.webp" class="img-fluid appleImg">
+                        <div class="answer-text">2</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div id="option3" class="answer-option col">
+                        <img src="/assets/apple.webp" class="img-fluid appleImg">
+                        <div class="answer-text">3</div>
+                    </div>
+                    <div id="option4" class="answer-option col">
+                        <img src="/assets/apple.webp" class="img-fluid appleImg">
+                        <div class="answer-text">4</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <canvas id="confetti"></canvas>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+    <script src="/js/animations.js"></script>
+    <script src="/js/matching.js"></script>
+
+    <a href="/homepage" class="btn btn-lg btn-primary" id="home-btn" onclick="check()">🏠 Home</a>
+</body>
+
+</html>
