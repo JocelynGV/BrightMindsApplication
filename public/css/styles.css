@@ -1,5 +1,6 @@
 #login-body {
-    background-color: #f0f0f0;
+    background-color: rgba(255, 255, 159, 1);
+    
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
