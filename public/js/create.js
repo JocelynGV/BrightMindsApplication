@@ -1,7 +1,7 @@
 $(document).ready(function () {
     fetchData();
 
-    $("#createForm").on("submit", function(event) {
+    $("#createForm").on("submit", function (event) {
         // Perform validation using checkTopic
         const shouldPreventDefault = checkTopic();
 
@@ -92,7 +92,7 @@ function checkTopic() {
     }
 
     // Check that all fields are filled
-    $("textarea[name='questions[]']").each(function() {
+    $("textarea[name='questions[]']").each(function () {
         if ($(this).val().trim() === "") {
             alert("Please fill out all questions.");
             preventSubmit = true; // Prevent submission if any question is empty
@@ -100,7 +100,7 @@ function checkTopic() {
         }
     });
 
-    $("textarea[name='answers[]']").each(function() {
+    $("textarea[name='answers[]']").each(function () {
         if ($(this).val().trim() === "") {
             alert("Please fill out all answers.");
             preventSubmit = true; // Prevent submission if any answer is empty

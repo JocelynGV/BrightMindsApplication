@@ -132,8 +132,8 @@ class myNavbar extends HTMLElement {
     } else {
       link.classList.add('disabled');
     }
-     // Dispatch a custom event
-     this.dispatchEvent(new CustomEvent('toggle-switch-changed', {
+    // Dispatch a custom event
+    this.dispatchEvent(new CustomEvent('toggle-switch-changed', {
       detail: { checked: event.target.checked }
     }));
   }
