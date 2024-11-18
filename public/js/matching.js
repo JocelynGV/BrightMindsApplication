@@ -9,13 +9,8 @@ $(document).ready(function () {
     //     alert(answerText);
     // });
 
-
     fetchData();
 });
-
-// fetch('/cards')
-//     .then(response => response.json())
-//     .then(users => console.log(users));
 
 var count = 0;
 var correctCount = 0;
@@ -87,8 +82,8 @@ async function fetchData() {
                 $("#overlay").css("display", "block");
                 $("#overlay").css("background-color", "rgba(255, 0, 0, 0.5)");
             }
-            playEndingAnimation();
 
+            playEndingAnimation();
 
             // increment count if there is another question
             // + 1 because we need to check if the next value will be in the array
@@ -122,7 +117,6 @@ async function fetchData() {
                 }, 400);
                 // $("#overlay").css("background-color", "rgba(135, 206, 235, 0.5)");
             }
-
         });
 
     } catch (error) {
@@ -189,7 +183,6 @@ function endgameButtons(percentCorrect) {
     let btn1 = $('<a>').text('Play Again!').addClass('btn btn-primary').attr("href", "/matching");
     let btn2 = $('<a>').text('Flashcards').addClass('btn btn-success').attr("href", "/flashcards");
     let btn3 = $('<a>').text('Home').addClass('btn btn-warning').attr("href", "/homepage");
-
 
     $('#endgame-button-container').append(btn1, btn2, btn3);
 }

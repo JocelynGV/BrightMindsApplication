@@ -105,7 +105,7 @@ class myNavbar extends HTMLElement {
               <a id="create-link" class="nav-link disabled" href="/create">Create</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/login">Login</a>
+              <a id="logout-link" class="nav-link disabled" href="/login">Logout</a>
             </li>
           </ul>
           <div id="switch-container">
@@ -124,16 +124,19 @@ class myNavbar extends HTMLElement {
     this.querySelector('#toggle-switch').addEventListener('change', this.toggleDisabledLink);
   }
 
-  // Toggle the 'disabled' class for the 'create-link' element
+  // Toggle the 'disabled' class for the 'create-link'and 'logout-link' element
   toggleDisabledLink(event) {
     const link = this.querySelector('#create-link');
+    const link2 = this.querySelector('#logout-link');
     if (event.target.checked) {
       link.classList.remove('disabled');
+      link2.classList.remove('disabled');
     } else {
       link.classList.add('disabled');
+      link2.classList.add('disabled');
     }
-     // Dispatch a custom event
-     this.dispatchEvent(new CustomEvent('toggle-switch-changed', {
+    // Dispatch a custom event
+    this.dispatchEvent(new CustomEvent('toggle-switch-changed', {
       detail: { checked: event.target.checked }
     }));
   }
